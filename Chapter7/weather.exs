@@ -4,6 +4,21 @@ defmodule WeatherHistory do
     [[time, 27, temp, rain]| for_location_27(tail)]
   end
   def for_location_27([_|tail]), do: for_location_27(tail)
+
+  #better
+  def for_location([], _target_loc), do: []
+  def for_location([[time, target_loc, temp,rain]|tail], target_loc) do
+    [[time, target_loc,temp,rain]| for_location(tail,target_loc)]
+  end
+  def for_location([_|tail], target_loc), do: for_location(tail,target_loc)
+
+  #best
+  def for_location2([], _target_loc), do: []
+  def for_location2([head = [_, target_loc,_,_] | tail], target_loc) do
+    [head | for_location2(tail, target_loc)]
+  end
+  def for_location2([_ | tail], target_loc), do: for_location2(tail, target_loc)
+
   def test_data do
     [
       [1366225622, 26, 15, 0.125],
