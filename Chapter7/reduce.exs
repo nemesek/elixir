@@ -5,7 +5,7 @@ defmodule MyList do
   def mapsum(list, func), do: _mapsum(list,func) |> reduce(0, &(&1 + &2))
   defp _mapsum([], _), do: []
   defp _mapsum([head|tail], func), do: [func.(head)| _mapsum(tail,func)]
-  def max(list), do: _max(list,0)
+  def max([head|tail]), do: _max(tail,head)
   defp _max([], largest), do: largest
   defp _max([head|tail], largest) when head > largest do _max(tail,head) end
   defp _max([_|tail], largest), do: _max(tail,largest)
