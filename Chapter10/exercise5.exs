@@ -7,4 +7,9 @@ defmodule Test do
       false
     end
   end
+  def each([], _), do: :ok
+  def each([head|tail], func) do
+    func.(head)
+    each(tail,func)
+  end
 end
